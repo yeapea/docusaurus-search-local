@@ -4,6 +4,7 @@
   "theme.SearchBar.noResultsText": "没有找到任何文档",
   "theme.SearchBar.searchInContext": "查看“{context}”以内的全部结果",
   "theme.SearchBar.seeAllOutsideContext": "查看“{context}”以外的全部结果",
+  "theme.SearchBar.clearSearch": "清除搜索",
   "theme.SearchPage.existingResultsTitle": "“{query}”的搜索结果",
   "theme.SearchPage.emptyResultsTitle": "搜索文档",
   "theme.SearchPage.documentsFound.plurals": "共找到 {count} 篇文档",
