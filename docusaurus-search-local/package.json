@@ -1,13 +1,13 @@
 {
   "name": "@easyops-cn/docusaurus-search-local",
-  "version": "0.55.3",
-  "description": "An offline/local search plugin for Docusaurus v3",
+  "version": "0.55.3-pushery.1",
+  "description": "An offline/local search plugin for Docusaurus v3, a fork of @easyops-cn/docusaurus-search-local",
   "repository": {
     "type": "git",
-    "url": "https://github.com/easyops-cn/docusaurus-search-local",
-    "directory": "packages/docusaurus-search-local"
+    "url": "https://github.com/yeapea/docusaurus-search-local",
+    "directory": "docusaurus-search-local"
   },
-  "homepage": "https://github.com/easyops-cn/docusaurus-search-local",
+  "homepage": "https://github.com/yeapea/docusaurus-search-local#readme",
   "scripts": {
     "start": "concurrently -k -n client,server,types \"yarn run start:client\" \"yarn run start:server\" \"yarn run start:types\"",
     "start:client": "tsc --watch --project tsconfig.client.json",

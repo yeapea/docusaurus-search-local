@@ -1,8 +1,16 @@
-# @easyops-cn/docusaurus-search-local
+# docusaurus-search-local (fork)
 
-[![Npm Version](https://img.shields.io/npm/v/@easyops-cn/docusaurus-search-local)](https://www.npmjs.com/package/@easyops-cn/docusaurus-search-local)
-[![CI Status](https://github.com/easyops-cn/docusaurus-search-local/workflows/gh-pages/badge.svg?event=push&branch=master)](https://github.com/easyops-cn/docusaurus-search-local/actions?query=workflow%3Agh-pages)
-[![Coverage Status](https://coveralls.io/repos/github/easyops-cn/docusaurus-search-local/badge.svg?branch=master)](https://coveralls.io/github/easyops-cn/docusaurus-search-local?branch=master)
+This repository is a fork of [easyops-cn/docusaurus-search-local](https://github.com/easyops-cn/docusaurus-search-local) at v0.55.3. The package keeps the name `@easyops-cn/docusaurus-search-local`, so it replaces the original without any change to a site's configuration or imports.
+
+What this fork changes is listed in its [releases](https://github.com/yeapea/docusaurus-search-local/releases).
+
+The fork is not published to npm. Install the tarball attached to a release:
+
+```shell
+npm install https://github.com/yeapea/docusaurus-search-local/releases/download/v0.55.3-pushery.1/docusaurus-search-local-0.55.3-pushery.1.tgz
+```
+
+Everything below is the documentation of the original package, adjusted where this fork differs.
 
 An offline/local search plugin/theme for [Docusaurus v2/v3](https://docusaurus.io/), which supports multiple languages, especially optimized for language of zh.
 
