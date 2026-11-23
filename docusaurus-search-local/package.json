@@ -36,7 +36,6 @@
     "@docusaurus/utils-common": "^2 || ^3",
     "@docusaurus/utils-validation": "^2 || ^3",
     "@easyops-cn/autocomplete.js": "^0.38.1",
-    "@node-rs/jieba": "^1.6.0",
     "cheerio": "^1.0.0",
     "clsx": "^2.1.1",
     "comlink": "^4.4.2",

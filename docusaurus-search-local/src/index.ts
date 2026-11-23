@@ -40,7 +40,7 @@ export interface PluginOptions {
   blogRouteBasePath?: string | string[];
 
   /**
-   * All [lunr-languages](https://github.com/MihaiValentin/lunr-languages) supported languages, + `zh` 🔥.
+   * All [lunr-languages](https://github.com/MihaiValentin/lunr-languages) supported languages, except `zh`.
    */
   language?: string | string[];
 
@@ -166,18 +166,6 @@ export interface PluginOptions {
    * @default "auto"
    */
   searchBarPosition?: "auto" | "left" | "right";
-
-  /**
-   * Provide your custom dict for language of zh,
-   * [see here](https://github.com/fxsjy/jieba#%E8%BD%BD%E5%85%A5%E8%AF%8D%E5%85%B8)
-   */
-  zhUserDict?: string;
-
-  /**
-   * Provide the file path to your custom dict for language of zh,
-   * E.g.: `path.resolve("./src/zh-dict.txt")`
-   */
-  zhUserDictPath?: string;
 
   /**
    * Provide an list of sub-paths as separate search context, E.g.: `["docs", "community", "legacy/resources"]`.

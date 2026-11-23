@@ -17,8 +17,6 @@ export function buildIndex(
     language,
     removeDefaultStopWordFilter,
     removeDefaultStemmer,
-    zhUserDict,
-    zhUserDictPath,
   }: ProcessedPluginOptions
 ): Omit<WrappedIndex, "type">[] {
   if (!pluginInitialized) {
@@ -32,15 +30,8 @@ export function buildIndex(
     if (LANGUAGES_NEED_WORDCUT.some((item) => language.includes(item))) {
       (lunr as any).wordcut = require("lunr-languages/wordcut");
     }
-    for (const lang of language.filter(
-      (item) => item !== "en" && item !== "zh"
-    )) {
+    for (const lang of language.filter((item) => item !== "en")) {
       require(`lunr-languages/lunr.${lang}`)(lunr);
-    }
-    if (language.includes("zh")) {
-      const { tokenizer, loadUserDict } = require("./tokenizer");
-      loadUserDict(zhUserDict, zhUserDictPath);
-      require("../../shared/lunrLanguageZh").lunrLanguageZh(lunr, tokenizer);
     }
     if (language.length > 1) {
       require("lunr-languages/lunr.multi")(lunr);
@@ -49,7 +40,9 @@ export function buildIndex(
     if (language.length > 1) {
       plugin = (lunr as LunrWithMultiLanguage).multiLanguage(...language);
     } else if (language[0] !== "en") {
-      plugin = (lunr as LunrWithMultiLanguage)[language[0] as "zh"];
+      plugin = (lunr as unknown as Record<string, lunr.Builder.Plugin>)[
+        language[0]
+      ];
     }
   }
 
@@ -81,11 +74,6 @@ export function buildIndex(
 
         if (removeDefaultStemmer) {
           this.pipeline.remove(lunr.stemmer);
-        }
-
-        // Override tokenizer when language `zh` is enabled.
-        if (language.includes("zh")) {
-          this.tokenizer = (lunr as any).zh.tokenizer;
         }
 
         this.ref("i");

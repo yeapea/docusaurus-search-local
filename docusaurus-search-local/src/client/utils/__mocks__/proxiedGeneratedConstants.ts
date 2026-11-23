@@ -1,4 +1,4 @@
-export let language = ["en", "zh"];
+export let language = ["en"];
 export let removeDefaultStopWordFilter: string[] = [];
 export const searchIndexUrl = "search-index{dir}.json?_=abc";
 export const searchResultLimits = 8;

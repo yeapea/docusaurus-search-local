@@ -130,22 +130,11 @@ export function generate(config: ProcessedPluginOptions, dir: string): string {
       )});`
     );
   }
-  for (const lang of language.filter(
-    (item) => item !== "en" && item !== "zh"
-  )) {
+  for (const lang of language.filter((item) => item !== "en")) {
     constantContents.push(
       `require(${JSON.stringify(
         require.resolve(`lunr-languages/lunr.${lang}`)
       )})(lunr);`
-    );
-  }
-  if (language.includes("zh")) {
-    constantContents.push(
-      `require(${JSON.stringify(
-        require.resolve(
-          "@easyops-cn/docusaurus-search-local/dist/client/shared/lunrLanguageZh"
-        )
-      )}).lunrLanguageZh(lunr);`
     );
   }
   if (language.length > 1) {

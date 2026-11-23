@@ -12,11 +12,11 @@ npm install https://github.com/yeapea/docusaurus-search-local/releases/download/
 
 Everything below is the documentation of the original package, adjusted where this fork differs.
 
-An offline/local search plugin/theme for [Docusaurus v2/v3](https://docusaurus.io/), which supports multiple languages, especially optimized for language of zh.
+An offline/local search plugin/theme for [Docusaurus v2/v3](https://docusaurus.io/), which supports multiple languages.
 
 > Originally forked from [cmfcmf/docusaurus-search-local](https://github.com/cmfcmf/docusaurus-search-local).
 >
-> Then later fully rewritten with TypeScript 💪, styles polished 💅, language of Chinese supported 🇨🇳, and tests covered ✅.
+> Then later fully rewritten with TypeScript 💪, styles polished 💅, and tests covered ✅.
 
 - [Live Demo](#live-demo)
 - [Screen Shots](#screen-shots)
@@ -36,10 +36,6 @@ https://easyops-cn.github.io/docusaurus-search-local/
 
 <p align="center">
   <img src="screen-shots/screen-shot-en.png" alt="Screen Shot EN" width="591" />
-</p>
-
-<p align="center">
-  <img src="screen-shots/screen-shot-zh.png" alt="Screen Shot ZH" width="602" />
 </p>
 
 ## ✨ Ask AI Support
@@ -100,9 +96,6 @@ module.exports = {
         // `hashed` is recommended as long-term-cache of index file is possible.
         hashed: true,
 
-        // For Docs using Chinese, it is recomended to set:
-        // language: ["en", "zh"],
-
         // Customize the keyboard shortcut to focus search bar (default is "mod+k"):
         // searchBarShortcutKeymap: "s", // Use 'S' key
         // searchBarShortcutKeymap: "ctrl+shift+f", // Use Ctrl+Shift+F
@@ -133,7 +126,7 @@ module.exports = {
 | indexPages                        | boolean                                                                     | `false`   | Whether to index pages.                                                                                                                                                                                                                                                                                                                                     |
 | docsRouteBasePath                 | string \| string[]                                                          | `"/docs"` | Base route path(s) of docs. Slash at beginning is not required. Note: for [docs-only mode](https://docusaurus.io/docs/docs-introduction#docs-only-mode), this needs to be the same as `routeBasePath` in your `@docusaurus/preset-classic` config e.g., `"/"`.                                                                                              |
 | blogRouteBasePath                 | string \| string[]                                                          | `"/blog"` | Base route path(s) of blog. Slash at beginning is not required.                                                                                                                                                                                                                                                                                             |
-| language                          | string \| string[]                                                          | `"en"`    | All [lunr-languages](https://github.com/MihaiValentin/lunr-languages) supported languages, + `zh` 🔥.                                                                                                                                                                                                                                                       |
+| language                          | string \| string[]                                                          | `"en"`    | All [lunr-languages](https://github.com/MihaiValentin/lunr-languages) supported languages, except `zh`.                                                                                                                                                                                                                                                       |
 | hashed                            | boolean \| `"filename"` \| `"query"`                                        | `false`   | Whether to add a hashed query when fetching index (based on the content hash of all indexed `*.md` in `docsDir` and `blogDir` if applicable). Setting to `"filename"` will save hash in filename instead of query.                                                                                                                                          |
 | docsDir                           | string \| string[]                                                          | `"docs"`  | The dir(s) of docs to get the content hash, it's relative to the dir of your project.                                                                                                                                                                                                                                                                       |
 | blogDir                           | string \| string[]                                                          | `"blog"`  | Just like the `docsDir` but applied to blog.                                                                                                                                                                                                                                                                                                                |
@@ -150,8 +143,6 @@ module.exports = {
 | searchBarShortcutKeymap           | string                                                                      | `"mod+k"` | Custom keyboard shortcut to focus the search bar. Supports formats like: `"s"` for single key, `"ctrl+k"` for key combinations, `"mod+k"` for Command+K (Mac) / Ctrl+K (others) - recommended cross-platform option, `"ctrl+shift+k"` for multiple modifiers.                                                                                               |
 | searchBarPosition                 | `"auto"` \| `"left"` \| `"right"`                                           | `"auto"`  | The side of the navbar the search bar should appear on. By default, it will try to autodetect based on your docusaurus config according to [the docs](https://docusaurus.io/docs/api/themes/configuration#navbar-search).                                                                                                                                   |
 | docsPluginIdForPreferredVersion   | string                                                                      |           | When you're using multi-instance of docs, set the docs plugin id which you'd like to check the preferred version with, for the search index.                                                                                                                                                                                                                |
-| zhUserDict                        | string                                                                      |           | Provide your custom dict for language of zh, [see here](https://github.com/fxsjy/jieba#%E8%BD%BD%E5%85%A5%E8%AF%8D%E5%85%B8)                                                                                                                                                                                                                                |
-| zhUserDictPath                    | string                                                                      |           | Provide the file path to your custom dict for language of zh, E.g.: `path.resolve("./src/zh-dict.txt")`                                                                                                                                                                                                                                                     |
 | searchContextByPaths              | `(string \| { label: string \| Record<string, string>; path: string; } )[]` | `[]`      | Provide an list of sub-paths as separate search context, E.g.: `["docs", "community", "legacy/resources"]`. It will create multiple search indexes by these paths.                                                                                                                                                                                          |
 | hideSearchBarWithNoSearchContext  | boolean                                                                     | `false`   | Whether to hide the search bar when no search context was matched. By default, if `searchContextByPaths` is set, pages which are not matched with it will be considered as with a search context of ROOT. By setting `hideSearchBarWithNoSearchContext: true`, these pages will be considered as with NO search context, and the search bar will be hidden. |
 | useAllContextsWithNoSearchContext | boolean                                                                     | `false`   | Whether to show results from all the contexts if no context is provided. This option should not be used with `hideSearchBarWithNoSearchContext: true` as this would show results when there is no search context. This will duplicate indexes and might have a performance cost depending on the index sizes.                                               |
