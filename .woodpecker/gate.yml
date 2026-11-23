@@ -1,0 +1,46 @@
+# Build, lint and test the plugin on every pull request into main and every push to main.
+#
+# The upstream workflows under .github/workflows start only on master, a branch this repository
+# does not have, and they publish to npm and GitHub Pages, which this repository never does. This
+# lane is the check instead: the type build of the plugin, ESLint over its sources (errors only,
+# the level the upstream commit hook enforces) and the Jest suite with the time zone the upstream
+# CI sets for it.
+#
+# Yarn runs from the release committed under .yarn/releases, so the version is the one
+# packageManager names. HUSKY=0 keeps the prepare script from installing git hooks into a CI
+# checkout.
+labels:
+  pool: gate
+
+when:
+  - event: push
+    branch: main
+  - event: pull_request
+    branch: main
+  - event: manual
+    evaluate: 'GATE == "yes"'
+
+steps:
+  install:
+    image: node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee
+    environment:
+      HUSKY: "0"
+    commands:
+      - node .yarn/releases/yarn-4.12.0.cjs install --immutable
+
+  build:
+    image: node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee
+    commands:
+      - node .yarn/releases/yarn-4.12.0.cjs workspace @easyops-cn/docusaurus-search-local run build
+
+  lint:
+    image: node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee
+    commands:
+      - node .yarn/releases/yarn-4.12.0.cjs eslint --quiet docusaurus-search-local/src
+
+  test:
+    image: node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee
+    environment:
+      TZ: Asia/Shanghai
+    commands:
+      - node .yarn/releases/yarn-4.12.0.cjs test
