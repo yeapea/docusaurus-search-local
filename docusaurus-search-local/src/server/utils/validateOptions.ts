@@ -44,8 +44,6 @@ const schema = Joi.object<PluginOptions>({
   searchBarShortcutKeymap: Joi.string().default("mod+k"),
   searchBarPosition: Joi.string().default("auto"),
   docsPluginIdForPreferredVersion: Joi.string(),
-  zhUserDict: Joi.string(),
-  zhUserDictPath: Joi.string(),
   searchContextByPaths: Joi.array().items(
     Joi.alternatives().try(
       Joi.string(),
@@ -75,5 +73,11 @@ export function validateOptions({
   options: PluginOptions | undefined;
   validate: ValidateFn;
 }): Required<PluginOptions> {
-  return validate(schema, options || {});
+  const validated = validate(schema, options || {});
+  if (([] as string[]).concat(validated.language).includes("zh")) {
+    throw new Error(
+      'Language "zh" is not supported: this fork removed Chinese word segmentation.'
+    );
+  }
+  return validated;
 }

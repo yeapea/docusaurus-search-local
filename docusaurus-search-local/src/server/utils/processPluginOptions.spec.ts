@@ -34,7 +34,7 @@ describe("processPluginOptions", () => {
         blogRouteBasePath: ["/blog"],
         docsDir: "docs",
         blogDir: "blog",
-        language: ["en", "zh"],
+        language: ["en", "de"],
         ignoreFiles: [/__meta__$/],
         ignoreCssSelectors: [],
         searchBarPosition: "left",
@@ -45,7 +45,7 @@ describe("processPluginOptions", () => {
         blogRouteBasePath: ["blog"],
         blogDir: [expect.toMatchPath("/tmp/blog")],
         docsDir: [expect.toMatchPath("/tmp/docs")],
-        language: ["en", "zh"],
+        language: ["en", "de"],
         ignoreFiles: [/__meta__$/],
         ignoreCssSelectors: [],
         searchBarPosition: "left",
@@ -75,7 +75,7 @@ describe("processPluginOptions", () => {
           ignoreFiles: "test",
           ignoreCssSelectors: [],
           searchBarPosition: "auto",
-          removeDefaultStopWordFilter: ["en", "zh"],
+          removeDefaultStopWordFilter: ["en", "de"],
         },
         {
           siteDir,
@@ -106,7 +106,7 @@ describe("processPluginOptions", () => {
       ignoreFiles: ["test"],
       ignoreCssSelectors: [],
       searchBarPosition: "left",
-      removeDefaultStopWordFilter: ["en", "zh"],
+      removeDefaultStopWordFilter: ["en", "de"],
     });
   });
 });

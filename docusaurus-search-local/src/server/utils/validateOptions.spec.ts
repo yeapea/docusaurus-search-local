@@ -24,8 +24,6 @@ describe("validateOptions", () => {
           Omit<
             PluginOptions,
             | "docsPluginIdForPreferredVersion"
-            | "zhUserDict"
-            | "zhUserDictPath"
             | "searchContextByPaths"
           >
         >
@@ -122,7 +120,7 @@ describe("validateOptions", () => {
       },
     ],
     [
-      { language: ["en", "zh"] },
+      { language: ["en", "de"] },
       {
         blogRouteBasePath: ["blog"],
         blogDir: ["blog"],
@@ -132,7 +130,7 @@ describe("validateOptions", () => {
         indexBlog: true,
         indexDocs: true,
         indexPages: false,
-        language: ["en", "zh"],
+        language: ["en", "de"],
         removeDefaultStopWordFilter: [],
         removeDefaultStemmer: false,
         hideSearchBarWithNoSearchContext: false,
@@ -280,7 +278,7 @@ describe("validateOptions", () => {
         searchBarPosition: "left",
         searchContextByPaths: ["docs", "community"],
         useAllContextsWithNoSearchContext: true,
-        removeDefaultStopWordFilter: ["en", "zh"],
+        removeDefaultStopWordFilter: ["en", "de"],
       },
       {
         blogRouteBasePath: ["/dev/blog"],
@@ -292,7 +290,7 @@ describe("validateOptions", () => {
         indexDocs: true,
         indexPages: false,
         language: ["en"],
-        removeDefaultStopWordFilter: ["en", "zh"],
+        removeDefaultStopWordFilter: ["en", "de"],
         removeDefaultStemmer: false,
         hideSearchBarWithNoSearchContext: false,
         useAllContextsWithNoSearchContext: true,
@@ -325,6 +323,12 @@ describe("validateOptions", () => {
         validate,
       });
     }).toThrow();
+  });
+
+  test('should reject the language "zh"', () => {
+    expect(() => {
+      validateOptions({ options: { language: ["en", "zh"] }, validate });
+    }).toThrow('Language "zh" is not supported');
   });
 
   test("should work with custom searchBarShortcutKeymap", () => {

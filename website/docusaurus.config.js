@@ -122,7 +122,7 @@ module.exports = {
       /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
       ({
         hashed: true,
-        language: ["en", "zh"],
+        language: ["en"],
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
         askAi: {

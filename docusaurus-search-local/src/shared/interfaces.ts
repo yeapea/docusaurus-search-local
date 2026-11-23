@@ -193,5 +193,4 @@ type Lunr = typeof lunr;
 
 export interface LunrWithMultiLanguage extends Lunr {
   multiLanguage: (...languages: string[]) => lunr.Builder.Plugin;
-  zh: lunr.Builder.Plugin;
 }

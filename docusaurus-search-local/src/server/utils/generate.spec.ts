@@ -35,25 +35,6 @@ describe("generate", () => {
       ],
     ],
     [
-      ["zh"],
-      [
-        "export const removeDefaultStemmer = false;",
-        "export const Mark = null;",
-        "export const searchResultContextMaxLength = 50;",
-        "export const explicitSearchResultPath = false;",
-        "export const searchBarShortcut = true;",
-        "export const searchBarShortcutHint = true;",
-        'export const searchBarShortcutKeymap = "mod+k";',
-        'export const searchBarPosition = "auto";',
-        "export const docsPluginIdForPreferredVersion = undefined;",
-        "export const indexDocs = true;",
-        "export const searchContextByPaths = null;",
-        "export const hideSearchBarWithNoSearchContext = false;",
-        "export const useAllContextsWithNoSearchContext = false;",
-        "export const askAi = null;",
-      ],
-    ],
-    [
       ["es"],
       [
         "export const removeDefaultStemmer = false;",
@@ -92,26 +73,7 @@ describe("generate", () => {
       ],
     ],
     [
-      ["en", "zh"],
-      [
-        "export const removeDefaultStemmer = false;",
-        "export const Mark = null;",
-        "export const searchResultContextMaxLength = 50;",
-        "export const explicitSearchResultPath = false;",
-        "export const searchBarShortcut = true;",
-        "export const searchBarShortcutHint = true;",
-        'export const searchBarShortcutKeymap = "mod+k";',
-        'export const searchBarPosition = "auto";',
-        "export const docsPluginIdForPreferredVersion = undefined;",
-        "export const indexDocs = true;",
-        "export const searchContextByPaths = null;",
-        "export const hideSearchBarWithNoSearchContext = false;",
-        "export const useAllContextsWithNoSearchContext = false;",
-        "export const askAi = null;",
-      ],
-    ],
-    [
-      ["en", "es", "zh"],
+      ["en", "es"],
       [
         "export const removeDefaultStemmer = false;",
         "export const Mark = null;",

@@ -12,8 +12,6 @@ jest.mock("./proxiedGeneratedConstants");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require("lunr-languages/lunr.stemmer.support")(lunr);
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-require("../../shared/lunrLanguageZh").lunrLanguageZh(lunr);
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 require("lunr-languages/lunr.multi")(lunr);
 
 (lunr as any).fake = {};
@@ -27,7 +25,7 @@ interface TestQuery {
 
 describe("smartQueries", () => {
   beforeEach(() => {
-    __setLanguage(["en", "zh"]);
+    __setLanguage(["en"]);
     __setRemoveDefaultStopWordFilter([]);
   });
 

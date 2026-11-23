@@ -64,25 +64,6 @@ describe("buildIndex", () => {
     ]);
   });
 
-  test('should work for ["zh"]', () => {
-    const wrappedIndexes = buildIndex(
-      allDocuments as SearchDocument[][],
-      {
-        language: ["zh"],
-        removeDefaultStopWordFilter: [] as string[],
-        removeDefaultStemmer: false,
-      } as ProcessedPluginOptions
-    );
-
-    expect(wrappedIndexes[0].index.search("hello")).toEqual([]);
-    expect(wrappedIndexes[0].index.search("if")).toEqual([]);
-    expect(wrappedIndexes[0].index.search("世界")).toEqual([
-      expect.objectContaining({
-        ref: "2",
-      }),
-    ]);
-  });
-
   test('should work for ["es"]', () => {
     const wrappedIndexes = buildIndex(
       allDocuments as SearchDocument[][],
@@ -133,11 +114,11 @@ describe("buildIndex", () => {
     ]);
   });
 
-  test('should work for ["en", "zh]', () => {
+  test('should work for ["en", "es"]', () => {
     const wrappedIndexes = buildIndex(
       allDocuments as SearchDocument[][],
       {
-        language: ["en", "zh"],
+        language: ["en", "es"],
         removeDefaultStopWordFilter: ["en"],
         removeDefaultStemmer: false,
       } as ProcessedPluginOptions
@@ -151,11 +132,6 @@ describe("buildIndex", () => {
     expect(wrappedIndexes[0].index.search("if")).toEqual([
       expect.objectContaining({
         ref: "1",
-      }),
-    ]);
-    expect(wrappedIndexes[0].index.search("世界")).toEqual([
-      expect.objectContaining({
-        ref: "2",
       }),
     ]);
   });
