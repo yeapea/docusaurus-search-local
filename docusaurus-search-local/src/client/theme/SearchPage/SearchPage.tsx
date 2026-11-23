@@ -132,11 +132,11 @@ function SearchPageContent(): React.ReactElement {
          We should not index search pages
           See https://github.com/facebook/docusaurus/pull/3233
         */}
-        <meta property="robots" content="noindex, follow" />
+        <meta name="robots" content="noindex, follow" />
         <title>{pageTitle}</title>
       </Head>
 
-      <div className="container margin-vert--lg">
+      <main className="container margin-vert--lg">
         <h1>{pageTitle}</h1>
 
         <div className="row">
@@ -151,7 +151,11 @@ function SearchPageContent(): React.ReactElement {
               type="search"
               name="q"
               className={styles.searchQueryInput}
-              aria-label="Search"
+              aria-label={translate({
+                id: "theme.SearchBar.label",
+                message: "Search",
+                description: "The ARIA label and placeholder for search button",
+              })}
               onChange={handleSearchInputChange}
               value={searchQuery}
               autoComplete="off"
@@ -171,6 +175,12 @@ function SearchPageContent(): React.ReactElement {
                 name="search-context"
                 className={styles.searchContextInput}
                 id="context-selector"
+                aria-label={translate({
+                  id: "theme.SearchPage.searchContext.label",
+                  message: "Search in",
+                  description:
+                    "The ARIA label of the select that picks where to search",
+                })}
                 value={searchContext}
                 onChange={(e) => updateSearchContext(e.target.value)}
               >
@@ -241,7 +251,7 @@ function SearchPageContent(): React.ReactElement {
               <SearchResultItem key={item.document.i} searchResult={item} />
             ))}
         </section>
-      </div>
+      </main>
     </React.Fragment>
   );
 }

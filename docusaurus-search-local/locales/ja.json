@@ -9,5 +9,6 @@
     "theme.SearchPage.emptyResultsTitle": "検索したい語句を入力してください。",
     "theme.SearchPage.documentsFound.plurals": "検索数：{count}件",
     "theme.SearchPage.noResultsText": "結果が見つかりません。",
-    "theme.SearchPage.searchContext.everywhere": "すべての場所"
+    "theme.SearchPage.searchContext.everywhere": "すべての場所",
+    "theme.SearchPage.searchContext.label": "検索範囲"
 }
