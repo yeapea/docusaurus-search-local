@@ -87,7 +87,8 @@ html[data-theme="dark"] .searchBar .dropdownMenu {
   color: var(--search-local-hit-color, #444950);
   display: flex;
   flex-direction: row;
-  height: var(--search-local-hit-height, 56px);
+  /* A hit grows with its title and path, which wrap instead of being cut off. */
+  min-height: var(--search-local-hit-height, 56px);
 }
 
 html[data-theme="dark"] .dropdownMenu .suggestion {
@@ -112,7 +113,8 @@ html[data-theme="dark"] .dropdownMenu .suggestion {
 .hitPath,
 .noResultsIcon,
 .hitFooter a {
-  color: var(--search-local-muted-color, #969faf);
+  /* #969faf, the earlier default, is 2.67:1 on a hit and 2.46:1 on the list. */
+  color: var(--search-local-muted-color, var(--ifm-color-content-secondary));
 }
 
 html[data-theme="dark"] .hitTree,
@@ -149,6 +151,7 @@ html[data-theme="dark"] .noResultsIcon {
   justify-content: center;
   margin: 0 8px;
   overflow-x: hidden;
+  padding: 6px 0;
   width: 80%;
 }
 
@@ -165,11 +168,10 @@ html[data-theme="dark"] .noResultsIcon {
   font-size: 0.75em;
 }
 
+/* Title and path wrap, so the text spacing of WCAG 1.4.12 does not cut them off. */
 .hitPath,
 .hitTitle {
-  white-space: nowrap;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
 }
 
 .hitAction {
@@ -212,9 +214,10 @@ html[data-theme="dark"] .noResultsIcon {
 .suggestion.cursor .hitTree,
 .suggestion.cursor .hitIcon,
 .suggestion.cursor .hitPath {
+  /* The text color for a filled primary surface: white on a dark primary, black on a light one. */
   color: var(
     --search-local-hit-active-color,
-    var(--ifm-color-white)
+    var(--ifm-font-color-base-inverse)
   ) !important;
 }
 
@@ -258,6 +261,12 @@ html[data-theme="dark"] .noResultsIcon {
   background: none;
   border: none;
   line-height: 1rem;
+  /* A target of at least 24 by 24 pixels (WCAG 2.5.8), with the sign in the middle. */
+  min-width: 24px;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 :global(.navbar__search) {

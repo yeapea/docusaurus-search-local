@@ -164,6 +164,8 @@ export default function SearchBar({
     }
     indexStateMap.current.set(searchContext, "loading");
     search.current?.autocomplete.destroy();
+    // `destroy()` restores the attributes autocomplete.js set itself, not this one.
+    searchBarRef.current?.removeAttribute("aria-controls");
     setLoading(true);
 
     const [autoComplete, openAskAIModule] = await Promise.all([
@@ -242,6 +244,10 @@ export default function SearchBar({
       const url = `${baseUrl}search/?${params.toString()}`;
       a.href = url;
       a.textContent = linkText;
+      // The link is rendered inside the listbox of autocomplete.js, which may
+      // only own options, so the link is one; its text gives the option its name.
+      a.setAttribute("role", "option");
+      a.setAttribute("aria-selected", "false");
       a.addEventListener("click", (e) => {
         if (!e.ctrlKey && !e.metaKey) {
           e.preventDefault();
@@ -354,6 +360,13 @@ export default function SearchBar({
       .on("autocomplete:closed", () => {
         searchBarRef.current?.blur();
       });
+
+    // autocomplete.js names its listbox with `aria-owns`, the pattern of ARIA 1.1.
+    // ARIA 1.2 asks a combobox for `aria-controls`, so the field names it there too.
+    const listboxId = searchBarRef.current?.getAttribute("aria-owns");
+    if (listboxId) {
+      searchBarRef.current?.setAttribute("aria-controls", listboxId);
+    }
 
     indexStateMap.current.set(searchContext, "done");
     setLoading(false);
@@ -530,7 +543,11 @@ export default function SearchBar({
           message: "Search",
           description: "The ARIA label and placeholder for search button",
         })}
-        aria-label="Search"
+        aria-label={translate({
+          id: "theme.SearchBar.label",
+          message: "Search",
+          description: "The ARIA label and placeholder for search button",
+        })}
         className={`navbar__search-input ${styles.searchInput}`}
         onMouseEnter={onInputMouseEnter}
         onFocus={onInputFocus}
@@ -548,7 +565,17 @@ export default function SearchBar({
       {searchBarShortcut &&
         searchBarShortcutHint &&
         (inputValue !== "" ? (
-          <button className={styles.searchClearButton} onClick={onClearSearch}>
+          <button
+            type="button"
+            className={styles.searchClearButton}
+            onClick={onClearSearch}
+            aria-label={translate({
+              id: "theme.SearchBar.clearSearch",
+              message: "Clear search",
+              description:
+                "The ARIA label of the button that clears the search field",
+            })}
+          >
             ✕
           </button>
         ) : (
