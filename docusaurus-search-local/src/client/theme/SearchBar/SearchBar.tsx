@@ -110,6 +110,8 @@ export default function SearchBar({
   const indexStateMap = useRef(new Map<string, "loading" | "done">());
   // Should the input be focused after the index is loaded?
   const focusAfterIndexLoaded = useRef(false);
+  // Whether a key or a pointer acts in the current task.
+  const readerActs = useRef(false);
   const [loading, setLoading] = useState(false);
   const [inputChanged, setInputChanged] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -436,6 +438,10 @@ export default function SearchBar({
   }, [handleSearchBarToggle, loadIndex]);
 
   const onInputBlur = useCallback(() => {
+    // The reader left the field, so the index that loads later takes no focus back.
+    if (readerActs.current) {
+      focusAfterIndexLoaded.current = false;
+    }
     setFocused(false);
     handleSearchBarToggle?.(false);
   }, [handleSearchBarToggle]);
@@ -453,6 +459,52 @@ export default function SearchBar({
     },
     []
   );
+
+  useEffect(() => {
+    // A blur in the same task as a key or a pointer is the reader leaving the
+    // field, not autocomplete.js moving the field in the page.
+    const act = (): void => {
+      readerActs.current = true;
+      setTimeout(() => {
+        readerActs.current = false;
+      }, 0);
+    };
+    // autocomplete.js takes a plain Tab as picking the suggestion under its
+    // cursor and goes to that page. Before it reads the Tab, the cursor comes
+    // off that suggestion the way the library takes it off itself, so the Tab
+    // moves the focus on, and leaving the field closes the list.
+    const tabLeaves = (event: KeyboardEvent): void => {
+      const input = searchBarRef.current;
+      if (
+        event.key !== "Tab" ||
+        event.shiftKey ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.metaKey ||
+        !input ||
+        event.target !== input
+      ) {
+        return;
+      }
+      const cursor = document
+        .getElementById(input.getAttribute("aria-owns") ?? "")
+        ?.querySelector(`.${styles.cursor}`);
+      cursor?.classList.remove(styles.cursor);
+      cursor?.removeAttribute("aria-selected");
+    };
+    const types = ["keydown", "pointerdown", "mousedown", "touchstart"];
+    for (const type of types) {
+      window.addEventListener(type, act, true);
+    }
+    // Capturing on the window runs before the library's listener on the field.
+    window.addEventListener("keydown", tabLeaves, true);
+    return () => {
+      for (const type of types) {
+        window.removeEventListener(type, act, true);
+      }
+      window.removeEventListener("keydown", tabLeaves, true);
+    };
+  }, []);
 
   // Implement hint icons for the search shortcuts on mac and the rest operating systems.
   const isMac = isBrowser ? isMacPlatform() : false;

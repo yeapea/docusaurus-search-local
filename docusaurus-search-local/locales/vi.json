@@ -9,5 +9,6 @@
   "theme.SearchPage.emptyResultsTitle": "Tìm kiếm theo tiêu đề",
   "theme.SearchPage.documentsFound.plurals": "Có {count} kết quả được tìm thấy",
   "theme.SearchPage.noResultsText": "Không tìm thấy kết quả nào",
-  "theme.SearchPage.searchContext.everywhere": "Mọi nơi"
+  "theme.SearchPage.searchContext.everywhere": "Mọi nơi",
+  "theme.SearchPage.searchContext.label": "Tìm trong"
 }
