@@ -1,0 +1,12 @@
+# gitleaks for this repository: its built-in rules, and the files whose findings are known not to be
+# secrets, each with its reason. The secret-scan lane hands this file to gitleaks.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "the yarn release that yarn set version commits"
+paths = [
+  # .yarn/releases holds the yarn command-line tool itself, one minified file per release, committed
+  # by `yarn set version` and never edited here. Its code carries strings shaped like API keys.
+  '''^\.yarn/releases/''',
+]
