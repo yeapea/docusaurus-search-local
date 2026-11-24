@@ -1,0 +1,7 @@
+# FlatIO matches a long string near the word "flat", and in yarn.lock that is the checksum of a
+# package whose name contains it, such as flat-cache or lodash.flatten. This repository uses no
+# Flat.io key.
+FlatIO
+# TLy matches a long string after the letters "tly", and a base64 integrity hash in yarn.lock can
+# contain them itself. This repository uses no T.LY key.
+TLy

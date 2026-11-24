@@ -1,0 +1,4 @@
+# The yarn release under .yarn/releases is the yarn command-line tool itself, committed as one
+# minified file by `yarn set version` and never edited here. Its code names the token formats of
+# npm and GitLab, which the scan reads as tokens in every release the history carries.
+^\.yarn/releases/
